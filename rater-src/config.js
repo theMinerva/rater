@@ -7,7 +7,7 @@ var config = {
 	// Script info
 	script: {
 		// Advert to append to edit summaries
-		advert:  ` ([[WP:RATER#${version}|Rater]])`,
+		advert:  ` ([[وپ:درجه‌بند#${version}|درجه‌بند]])`,
 		version: version
 	},
 	// Default preferences, if user subpage raterPrefs.json does not exist
@@ -39,51 +39,51 @@ var config = {
 	] ),
 	bannerDefaults: {
 		classes: [
-			"FA",
-			"FL",
-			"A",
-			"GA",
-			"B",
-			"C",
-			"Start",
-			"Stub",
-			"List"
+			"برگزیده",
+			"فهرست برگزیده",
+			"عالی",
+			"خوب",
+			"متوسط",
+			"ضعیف",
+			"ابتدایی",
+			"خرد",
+			"فهرست"
 		],
 		importances: [
-			"Top",
-			"High",
-			"Mid",
-			"Low"
+			"بسیار بالا‏",
+			"بالا",
+			"متوسط",
+			"کم"
 		],
 		extendedClasses: [
-			"Category",
-			"Draft",
-			"File",
+			"رده",
+			"پیش‌نویس",
+			"پرونده",
 			"FM",
-			"Portal",
-			"Project",
-			"Template",
+			"درگاه",
+			"ویکی‌پروژه",
+			"الگو",
 			"Bplus",
 			"Future",
 			"Current",
-			"Disambig",
-			"NA",
-			"Redirect",
+			"ابهام‌زدایی",
+			"درجه‌بندی‌نشده",
+			"تغییرمسیر",
 			"Book"
 		],
 		extendedImportances: [
-			"Top",
-			"High",
-			"Mid",
-			"Low",
-			"Bottom",
-			"NA"
+			"بسیار بالا",
+			"بالا",
+			"متوسط",
+			"کم",
+			"بی‌نیاز از درجه‏",
+			"اهمیت‌بندی‌نشده"
 		]
 	},
 	customBanners: {
 		"WikiProject Military history": {
 			classes: [
-				"FA",
+				"مقاله برگزیده",
 				"FL",
 				"A",
 				"GA",
@@ -159,7 +159,7 @@ var config = {
 		"WikiProject banner shell/redirect",
 		"WikiProject Shell",
 		"Banner shell",
-		"Scope shell",
+		"پتوپ",
 		"Project shell",
 		"WikiProject banner"
 	],
@@ -175,7 +175,7 @@ var config = {
 		},
 		"listas": {
 			"label": {
-				"en": "List as"
+				"en": "ترتیب‌پیش‌فرض"
 			},
 			"description": {
 				"en": "Sortkey for talk page"
@@ -183,7 +183,7 @@ var config = {
 		},
 		"small": {
 			"label": {
-				"en": "Small?",
+				"en": "کوچک?",
 			},
 			"description": {
 				"en": "Display a small version. Allowed values: ['yes']."
@@ -192,37 +192,37 @@ var config = {
 		},
 		"attention": {
 			"label": {
-				"en": "Attention required?",
+				"en": "نیازمند توجه",
 			},
 			"description": {
 				"en": "Immediate attention required. Allowed values: ['yes']."
 			},
-			"autovalue": "yes"
+			"autovalue": "بله"
 		},
 		"needs-image": {
 			"label": {
-				"en": "Needs image?",
+				"en": "نیازمند تصویر",
 			},
 			"description": {
 				"en": "Request that an image or photograph of the subject be added to the article. Allowed values: ['yes']."
 			},
 			"aliases": [
-				"needs-photo"
+				"نیازمند تصویر"
 			],
-			"autovalue": "yes",
+			"autovalue": "بله",
 			"suggested": true
 		},
 		"needs-infobox": {
 			"label": {
-				"en": "Needs infobox?",
+				"en": "نیازمند جعبه اطلاعات",
 			},
 			"description": {
 				"en": "Request that an infobox be added to the article. Allowed values: ['yes']."
 			},
 			"aliases": [
-				"needs-photo"
+				"نیازمند جعبه اطلاعات"
 			],
-			"autovalue": "yes",
+			"autovalue": "بله",
 			"suggested": true
 		}
 	}

@@ -10,72 +10,72 @@ function PrefsFormWidget( config ) {
 	this.$element.addClass("rater-prefsFormWidget");
 
 	this.layout =  new OO.ui.FieldsetLayout( {
-		label: "Preferences",
+		label: "ترجیحات درجه‌بند",
 		$element: this.$element
 	} );
 
 	this.preferences = {
 		"autostart": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autostart Rater"
+			label: "باز کردن خودکار ابراز"
 		},
 		"autostartRedirects": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autostart on redirects"
+			label: "باز کردن خودکار ابراز در تغییر_مسیرها"
 		},
 		"autostartNamespaces": {
 			input: new mw.widgets.NamespacesMultiselectWidget(),
-			label: "Autostart in these namespaces"
+			label: "باز کردن خودکار ابراز در فضاهای نام معین"
 		},
 		"minForShell": {
 			input: new OO.ui.NumberInputWidget( { "min": 2 } ),
-			label: "Minimum number of banners for WikiProject banner shell"
+			label: "حداقل تعداد بنر پیش از استفاده از الگوی پتوپ"
 		},
 		"bypassRedirects": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Bypass redirects to banners"
+			label: "دور زدن تغییر_مسیرهای الگوهای ویکی‌پروژه"
 		},
 		"autofillClassFromOthers":  {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill class from other banners"
+			label: "پر کردن خودکار درجه از دیگر الگوهای موجود"
 		},
 		"autofillClassFromOres": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill class based on ORES prediction"
+			label: "پر کردن خودکار درجه بر اساس پیش‌بینی ساعن"
 		},
 		"autofillImportance": {
 			input: new OO.ui.ToggleSwitchWidget(),
-			label: "Autofill low importance"
+			label: "پر کردن خودکار اهمیت به‌صورت «پایین»"
 		},
 		"collapseParamsLowerLimit": {
 			input: new OO.ui.NumberInputWidget( { "min": 1 } ),
-			label: "Minimum number of parameters to show uncollapsed"
+			label: "حداقل تعداد پارامترها پیش از آنکه الگو به حالت بسته نشان داده شود."
 		},
 		"watchlist": {
 			input: new OO.ui.ButtonSelectWidget( {
 				items: [
 					new OO.ui.ButtonOptionWidget( {
 						data: "preferences",
-						label: "Default",
-						title: "Uses the same setting as if you manually edited the page, as per Special:Preferences"
+						label: "پیش‌فرض",
+						title: "بنا بر تنظیمات شما در ترجیحات ویکی‌پدیا"
 					} ),
 					new OO.ui.ButtonOptionWidget( {
 						data: "watch",
-						label: "Always",
-						title: "Always add pages Rater edits to your watchlist"
+						label: "همیشه",
+						title: "همهٔ صفحاتی که با این ابزار ویرایش شوند به فهرست پیگیری شما افزوده می‌شوند."
 					} ),
 					new OO.ui.ButtonOptionWidget( {
 						data: "nochange",
-						label: "Never",
-						title: "Never add pages Rater edit to your watchlist"
+						label: "هرگز",
+						title: "پس از ویرایش با این ابزار صفحات به فهرست پیگیری شما اضافه نمی‌شوند."
 					} ),
 				]
 			}).selectItemByData("preferences"),
-			label: "Add edited pages to watchlist"
+			label: "افزودن صفحات ویرایش‌شده به فهرست پیگیری"
 		},
 		"resetCache": {
 			input: new OO.ui.ButtonWidget( {
-				label: "Reset cache",
+				label: "خالی‌کردن کاشه (میانگیر) مرورگر",
 				title: "Remove cached data, including list of WikiProjects and template parameters",
 				flags: ["destructive"]
 			} )
@@ -113,7 +113,7 @@ PrefsFormWidget.prototype.setPrefValues = function(prefs) {
 				input.addTag(
 					ns.toString(),
 					ns === 0
-						? "(Main)"
+						? "(مقاله)"
 						: config.mw.wgFormattedNamespaces[ns]
 				)
 			);

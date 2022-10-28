@@ -49,8 +49,10 @@ var setupRater = function(clickEvent) {
 				return filterAndMap(
 					templates, 			
 					// Filter out non-banners
-					template => { 
-						if (template.isShellTemplate()) { return true; }
+					template => { 	
+						if (template.isShellTemplate()) {
+							return true; 
+						}
 						var mainText = template.redirectTarget
 							? template.redirectTarget.getMainText()
 							: template.getTitle().getMainText();
@@ -65,7 +67,7 @@ var setupRater = function(clickEvent) {
 					template => {
 						var mainText = template.redirectTarget
 							? template.redirectTarget.getMainText()
-							: template.getTitle().getMainText();
+							: template.getTitle().getMainText();	
 						if (allBanners.wrappers.includes(mainText)) {
 							template.redirectTarget = mw.Title.newFromText("Template:Subst:" + mainText);
 						}
@@ -78,7 +80,7 @@ var setupRater = function(clickEvent) {
 						if ( allBanners.inactive.includes(mainText) ) {
 							template.inactiveProject = true;
 						}
-						return template;
+						return template;						
 					}
 				);
 			});
@@ -107,11 +109,11 @@ var setupRater = function(clickEvent) {
 		titles: subjectPage.getPrefixedText(),
 		redirects: 1,
 		clcategories: [
-			"Category:All disambiguation pages",
-			"Category:All stub articles",
-			"Category:Good articles",
-			"Category:Featured articles",
-			"Category:Featured lists"
+			"Category:همه صفحه‌های ابهام‌زدایی",
+			"Category:همه مقاله‌های خرد",
+			"Category:مقاله‌های خوب",
+			"Category:مقاله‌های برگزیده",
+			"Category:فهرست‌های برگزیده"
 		]
 	}).then(response => {
 		if ( !response || !response.query || !response.query.pages ) {
@@ -122,15 +124,15 @@ var setupRater = function(clickEvent) {
 			return { redirectTarget };
 		}
 		const page = response.query.pages[0];
-		const hasCategory = category => page.categories && page.categories.find(cat => cat.title === "Category:"+category);
+		const hasCategory = category => page.categories && page.categories.find(cat => cat.title === "رده:"+category);
 		return {
 			redirectTarget,
-			disambig: hasCategory("All disambiguation pages"),
-			stubtag: hasCategory("All stub articles"),
-			isGA: hasCategory("Good articles"),
-			isFA: hasCategory("Featured articles"),
-			isFL: hasCategory("Featured lists"),
-			isList: !hasCategory("Featured lists") && /^Lists? of/.test(subjectPage.getPrefixedText())
+			disambig: hasCategory("همه صفحه‌های ابهام‌زدایی"),
+			stubtag: hasCategory("همه مقاله‌های خرد"),
+			isGA: hasCategory("مقاله‌های خوب"),
+			isFA: hasCategory("مقاله‌های برگزیده"),
+			isFL: hasCategory("فهرست‌های برگزیده"),
+			isList: !hasCategory("فهرست‌های برگزیده") && /^فهرست?/.test(subjectPage.getPrefixedText())
 		};
 	}).catch(() => null); // Failure ignored
 
@@ -165,8 +167,8 @@ var setupRater = function(clickEvent) {
 				return false;
 			}
 			return API.getORES(latestRevId)
-				.then(function(result) {
-					var data = result.enwiki.scores[latestRevId].articlequality;
+				.then(function(result) {				
+					var data = result.fawiki.scores[latestRevId].articlequality;
 					if ( data.error ) {
 						return $.Deferred().reject(data.error.type, data.error.message);
 					}
@@ -201,8 +203,7 @@ var setupRater = function(clickEvent) {
 		isOpened: isOpenedPromise
 	});
 
-	loadDialogWin.opened.then(isOpenedPromise.resolve);
-
+	loadDialogWin.opened.then(isOpenedPromise.resolve);	
 
 	$.when(
 		prefsPromise,

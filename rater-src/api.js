@@ -12,13 +12,14 @@ var API = new mw.Api( {
 
 /* ---------- API for ORES ---------------------------------------------------------------------- */
 API.getORES = function(revisionID) {
-	return $.get("https://ores.wikimedia.org/v3/scores/enwiki?models=articlequality&revids="+revisionID);
+	return $.get("https://ores.wikimedia.org/v3/scores/fawiki?models=articlequality&revids="+revisionID);
 };
 
 /* ---------- Raw wikitext ---------------------------------------------------------------------- */
 API.getRaw = function(page) {
 	return $.get("https:" + config.mw.wgServer + mw.util.getUrl(page, {action:"raw"}))
 		.then(function(data) {
+			console.log("https:" + config.mw.wgServer + mw.util.getUrl(page, {action:"raw"}));
 			if ( !data ) {
 				return $.Deferred().reject("ok-but-empty");
 			}

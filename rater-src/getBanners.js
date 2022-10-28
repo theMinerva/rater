@@ -27,31 +27,31 @@ var getListOfBannersFromApi = function() {
 
 	var categories = [
 		{
-			title: "Category:WikiProject banners with quality assessment",
+			title: "Category:سرصفحه‌های ویکی‌پروژه با ارزشیابی کیفیت",
 			abbreviation: "withRatings",
 			banners: [],
 			processed: $.Deferred()
 		},
 		{
-			title: "Category:WikiProject banners without quality assessment",
+			title: "Category:سرصفحه‌های ویکی‌پروژه بدون ارزشیابی کیفیت",
 			abbreviation: "withoutRatings",
 			banners: [],
 			processed: $.Deferred()
 		},
 		{
-			title: "Category:WikiProject banner wrapper templates",
+			title: "Category:الگوهای دربرگیرنده سرصفحه ویکی‌پروژه‏",
 			abbreviation: "wrappers",
 			banners: [],
 			processed: $.Deferred()
 		},
 		{
-			title: "Category:WikiProject banner templates not based on WPBannerMeta",
+			title: "Category:الگوهای سرصفحه ویکی‌پروژه غیراستاندارد",
 			abbreviation: "notWPBM",
 			banners: [],
 			processed: $.Deferred()
 		},
 		{
-			title: "Category:Inactive WikiProject banners",
+			title: "Category:الگوهای سرصفحه ویکی‌پروژه‌های غیرفعال",
 			abbreviation: "inactive",
 			banners: [],
 			processed: $.Deferred()
@@ -74,7 +74,7 @@ var getListOfBannersFromApi = function() {
 		
 		// Gather titles into array - excluding "Template:" prefix
 		var resultTitles = result.query.categorymembers.map(function(info) {
-			return info.title.slice(9);
+			return info.title.slice(5);
 		});
 		Array.prototype.push.apply(categories[catIndex].banners, resultTitles);
 		

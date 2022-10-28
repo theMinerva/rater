@@ -278,8 +278,8 @@ Template.prototype.getDataForParam = function(key, paraName) {
 	
 	var data = this.paramData[para][key];
 	// Data might actually be an object with key "en"
-	if ( data && data.en && !Array.isArray(data) ) {
-		return data.en;
+	if ( data && data.fa && !Array.isArray(data) ) {
+		return data.fa;
 	}
 	return data;
 };
@@ -355,10 +355,10 @@ Template.prototype.setParamDataAndSuggestions = function() {
 					});
 				}
 				// Extract allowed values array from description
-				if ( paraData.description && /\[.*'.+?'.*?\]/.test(paraData.description.en) ) {
+				if ( paraData.description && /\[.*'.+?'.*?\]/.test(paraData.description.fa) ) {
 					try {
 						var allowedVals = JSON.parse(
-							paraData.description.en
+							paraData.description.fa
 								.replace(/^.*\[/,"[")
 								.replace(/"/g, "\\\"")
 								.replace(/'/g, "\"")
@@ -368,7 +368,7 @@ Template.prototype.setParamDataAndSuggestions = function() {
 						self.paramData[paraName].allowedValues = allowedVals;
 					} catch(e) {
 						console.warn("[Rater] Could not parse allowed values in description:\n  "+
-					paraData.description.en + "\n Check TemplateData for parameter |" + paraName +
+					paraData.description.fa + "\n Check TemplateData for parameter |" + paraName +
 					"= in " + self.getTitle().getPrefixedText());
 					}
 				}
@@ -380,7 +380,7 @@ Template.prototype.setParamDataAndSuggestions = function() {
 				return key;
 			});
 			self.parameterSuggestions = allParamsArray.filter(function(paramName) {
-				return ( paramName && paramName !== "class" && paramName !== "importance" );
+				return ( paramName && paramName !== "درجه" && paramName !== "کلاس" && paramName !== "class" && paramName !== "اهمیت" );
 			})
 				.map(function(paramName) {
 					var optionObject = {data: paramName};
@@ -435,8 +435,8 @@ Template.prototype.addMissingParams = function() {
 	var thisTemplate = this;
 
 	// Autofill listas parameter for WP:BIO
-	var isBiographyBanner = this.getTitle().getMainText() === "WikiProject Biography" ||
-		(this.redirectTarget && this.redirectTarget.getMainText() === "WikiProject Biography");
+	var isBiographyBanner = this.getTitle().getMainText() === "ویکی‌پروژه زندگی‌نامه" ||
+		(this.redirectTarget && this.redirectTarget.getMainText() === "ویکی‌پروژه زندگی‌نامه");
 
 	if (isBiographyBanner && !this.getParam("listas")) {
 		var subjectTitle = mw.Title.newFromText(config.mw.wgPageName).getSubjectPage();
@@ -529,10 +529,15 @@ Template.prototype.setClassesAndImportances = function() {
 			var extendedClasses = config.bannerDefaults.extendedClasses.filter(function(cl) {
 				return catsHtml.indexOf(cl+"-Class") !== -1;
 			});
-			this.classes = [...config.bannerDefaults.classes, ...extendedClasses];
-			this.importances = config.bannerDefaults.extendedImportances.filter(function(imp) {
-				return catsHtml.indexOf(imp+"-importance") !== -1;
+			
+			var extendedImportances = config.bannerDefaults.extendedImportances.filter(function(cl) {
+				return catsHtml.indexOf(cl+"-Importance") !== -1;
 			});
+			this.classes = [...config.bannerDefaults.classes, ...extendedClasses];
+			//this.importances = config.bannerDefaults.extendedImportances.filter(function(imp) {
+			//	return catsHtml.indexOf(imp+"-importance") !== -1;
+			//});
+			this.importances = [...config.bannerDefaults.importances, ...extendedImportances];
 			cache.write(mainText+"-ratings",
 				{
 					classes: this.classes,

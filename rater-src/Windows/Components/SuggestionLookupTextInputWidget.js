@@ -22,7 +22,7 @@ SuggestionLookupTextInputWidget.prototype.setSuggestions = function(suggestions)
 
 // Returns data, as a resolution to a promise, to be passed to #getLookupMenuOptionsFromData
 SuggestionLookupTextInputWidget.prototype.getLookupRequest = function () {
-	var deferred = $.Deferred().resolve(new RegExp("\\b" + mw.util.escapeRegExp(this.getValue()), "i"));
+	var deferred = $.Deferred().resolve(new RegExp("(?=^|\\s)" + mw.util.escapeRegExp(this.getValue()), "u"));
 	return deferred.promise( { abort: function () {} } );
 };
 

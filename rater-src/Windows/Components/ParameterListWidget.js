@@ -46,7 +46,7 @@ var ParameterListWidget = function ParameterListWidget( config ) {
 
 	// Add the button that allows user to add more parameters
 	this.addParametersButton = new OO.ui.ButtonWidget({
-		label: "Add parameter",
+		label: "افزودن پارامتر",
 		icon: "add",
 		framed: false,
 		$element: $("<span style='margin-bottom:0'>")

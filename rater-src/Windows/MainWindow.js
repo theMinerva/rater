@@ -17,65 +17,69 @@ OO.inheritClass( MainWindow, OO.ui.ProcessDialog );
 
 MainWindow.static.name = "main";
 MainWindow.static.title = $("<span>").css({"font-weight":"normal"}).append(
-	$("<a>").css({"font-weight": "bold"}).attr({"href": mw.util.getUrl("WP:RATER"), "target": "_blank"}).text("Rater"),
+	$("<a>").css({"font-weight": "bold"}).attr({"href": mw.util.getUrl("وپ:درجه‌بند"), "target": "_blank"}).text("درجه‌بند"),
 	" (",
-	$("<a>").attr({"href": mw.util.getUrl("WT:RATER"), "target": "_blank"}).text("talk"),
+	$("<a>").attr({"href": mw.util.getUrl("وپ:درجه‌بند"), "target": "_blank"}).text("درجه‌بند"),
 	") ",
 	$("<span>").css({"font-size":"90%"}).text("v"+appConfig.script.version)
 );
 MainWindow.static.size = "large";
 MainWindow.static.actions = [
-	// Primary (top right):
-	{
-		label: "X", // not using an icon since color becomes inverted, i.e. white on light-grey
-		title: "Close (and discard any changes)",
-		flags: "primary",
-		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
-	},
+
 	// Safe (top left)
 	{
 		action: "showPrefs",
 		flags: "safe",
 		icon: "settings",
-		title: "Preferences",
+		title: "ترجیحات",
 		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
 	},
+	
+	// Primary (top right):
+	{
+		label: "X", // not using an icon since color becomes inverted, i.e. white on light-grey
+		title: "بستن ابزار (هیچ چیز ذخیره نمی‌شود)",
+		flags: "primary",
+		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
+	},
+	
+	
 	// Others (bottom)
 	{
 		action: "save",
 		accessKey: "s",
-		label: new OO.ui.HtmlSnippet("<span style='padding:0 1em;'>Save</span>"),
+		label: new OO.ui.HtmlSnippet("<span style='padding:0 1em;'>ذخیره</span>"),
 		flags: ["primary", "progressive"],
 		modes: ["edit", "diff", "preview"] // available when current mode isn't "prefs"
 	},
 	{
 		action: "preview",
 		accessKey: "p",
-		label: "Show preview",
+		label: "پیش‌نمایش",
 		modes: ["edit", "diff"] // available when current mode isn't "preview" or "prefs"
 	},
 	{
 		action: "changes",
 		accessKey: "v",
-		label: "Show changes",
+		label: "نمایش تغییرات",
 		modes: ["edit", "preview"] // available when current mode isn't "diff" or "prefs"
 	},
 	{
 		action: "back",
-		label: "Back",
+		label: "عقب‌گرد",
 		modes: ["diff", "preview"] // available when current mode is "diff" or "prefs"
 	},
 	
 	// "prefs" mode only
 	{
 		action: "savePrefs",
-		label: "Update",
+		label: "به‌روز‌رسانی",
 		flags: ["primary", "progressive"],
 		modes: "prefs" 
 	},
 	{
 		action: "closePrefs",
-		label: "Cancel",
+		label: "بستن",
 		flags: "safe",
 		modes: "prefs"
 	}
@@ -106,7 +110,7 @@ MainWindow.prototype.initialize = function () {
 						.css({"vertical-align": "text-bottom;"})
 						.attr({
 							"src": "//upload.wikimedia.org/wikipedia/commons/thumb/5/51/Objective_Revision_Evaluation_Service_logo.svg/40px-Objective_Revision_Evaluation_Service_logo.svg.png",
-							"title": "Machine predicted quality from ORES",
+							"title": "پیش‌بینی خودکار کیفیت (ساعن)",
 							"alt": "ORES logo",
 							"width": "20px",
 							"height": "20px"
@@ -144,7 +148,7 @@ MainWindow.prototype.initialize = function () {
 
 	// Preview, Show changes
 	this.parsedContentContainer = new OO.ui.FieldsetLayout( {
-		label: "Preview"
+		label: "پیش‌نمایش"
 	} );
 	this.parsedContentWidget = new OO.ui.LabelWidget( {label: "",	$element:$("<div>")	});
 	this.parsedContentContainer.addItems([
@@ -328,28 +332,28 @@ MainWindow.prototype.getSetupProcess = function ( data ) {
 			}
 			// Show page type, or ORES prediction, if available
 			if (this.pageInfo.redirect) {
-				this.pagetypeLabel.setLabel("Redirect page").toggle(true);
+				this.pagetypeLabel.setLabel("صفحه تغییر مسیر").toggle(true);
 			} else if (this.pageInfo.isDisambig) {
-				this.pagetypeLabel.setLabel("Disambiguation page").toggle(true);
+				this.pagetypeLabel.setLabel("صفحه ابهام‌زدایی").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isGA) {
-				this.pagetypeLabel.setLabel("Good article").toggle(true);
+				this.pagetypeLabel.setLabel("خوب").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isFA) {
-				this.pagetypeLabel.setLabel("Featured article").toggle(true);
+				this.pagetypeLabel.setLabel("برگزیده").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isFL) {
-				this.pagetypeLabel.setLabel("Featured list").toggle(true);
+				this.pagetypeLabel.setLabel("فهرست برگزیده").toggle(true);
 			} else if (this.pageInfo.isArticle && data.isList) {
-				this.pagetypeLabel.setLabel("List article").toggle(true);
+				this.pagetypeLabel.setLabel("فهرست").toggle(true);
 			} else if (data.ores) {
 				this.oresClass = data.ores.prediction;
 				this.oresLabel.toggle(true).$element.find(".oresPrediction").append(
-					"Prediction: ",
+					"پیش‌بینی: ",
 					$("<strong>").text(data.ores.prediction),
 					"&nbsp;(" + data.ores.probability + ")"
 				);
 			} else if (this.pageInfo.isArticle) {
-				this.pagetypeLabel.setLabel("Article page").toggle(true);
+				this.pagetypeLabel.setLabel("مقالات").toggle(true);
 			} else {
-				this.pagetypeLabel.setLabel( this.subjectPage.getNamespacePrefix().slice(0,-1) + " page" ).toggle(true);
+				this.pagetypeLabel.setLabel( this.subjectPage.getNamespacePrefix().slice(0,-1) + " صفحه" ).toggle(true);
 			}
 			// Set props for use in making wikitext and edit summaries
 			this.talkWikitext = data.talkWikitext;
@@ -391,7 +395,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				(code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not save preferences."),
+							$("<strong style='display:block;'>").text("امکان ذخیره کردن نیست."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -427,7 +431,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 			).catch((code, err) => $.Deferred().reject(
 				new OO.ui.Error(
 					$("<div>").append(
-						$("<strong style='display:block;'>").text("Could not save your changes."),
+						$("<strong style='display:block;'>").text("امکان ذخیره کردن نیست."),
 						$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 					)
 				)
@@ -442,7 +446,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 			API.post({
 				action: "parse",
 				contentmodel: "wikitext",
-				text: this.transformTalkWikitext(this.talkWikitext) + "\n<hr>\n" + "'''Edit summary:''' " + this.makeEditSummary(),
+				text: this.transformTalkWikitext(this.talkWikitext) + "\n<hr>\n" + "'''خلاصه ویرانیش:''' " + this.makeEditSummary(),
 				title: this.talkpage.getPrefixedText(),
 				pst: 1
 			}).then( result => {
@@ -452,7 +456,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				var previewHtmlSnippet = new OO.ui.HtmlSnippet(result.parse.text["*"]);
 
 				this.parsedContentWidget.setLabel(previewHtmlSnippet);
-				this.parsedContentContainer.setLabel("Preview:");
+				this.parsedContentContainer.setLabel("پیش‌نمایش:");
 				this.actions.setMode("preview");
 				this.contentArea.setItem( this.parsedContentLayout );
 				this.topBar.setDisabled(true);
@@ -461,7 +465,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				.catch( (code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not show changes."),
+							$("<strong style='display:block;'>").text("امکان پیشنمایش نیست."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -485,14 +489,14 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 					}
 					var $diff = $("<table>").addClass("diff").css("width", "100%").append(
 						$("<tr>").append(
-							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("Latest revision"),
-							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("New text")
+							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("آخرین نسخه"),
+							$("<th>").attr({"colspan":"2", "scope":"col"}).css("width", "50%").text("متن جدید")
 						),
 						result.compare["*"],
 						$("<tfoot>").append(
 							$("<tr>").append(
 								$("<td colspan='4'>").append(
-									$("<strong>").text("Edit summary: "),
+									$("<strong>").text("خلاصه ویرایش: "),
 									this.makeEditSummary()
 								)
 							)
@@ -500,7 +504,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 					);
 
 					this.parsedContentWidget.setLabel($diff);
-					this.parsedContentContainer.setLabel("Changes:");
+					this.parsedContentContainer.setLabel("تغییرات:");
 					this.actions.setMode("diff");
 					this.contentArea.setItem( this.parsedContentLayout );
 					this.topBar.setDisabled(true);
@@ -509,7 +513,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 				.catch( (code, err) => $.Deferred().reject(
 					new OO.ui.Error(
 						$("<div>").append(
-							$("<strong style='display:block;'>").text("Could not show changes."),
+							$("<strong style='display:block;'>").text("امکان نمایش تغییرات نیست."),
 							$("<span style='color:#777'>").text( makeErrorMsg(code, err) )
 						)
 					)
@@ -525,7 +529,7 @@ MainWindow.prototype.getActionProcess = function ( action ) {
 	} else if (!action && this.bannerList.changed) {
 		// Confirm closing of dialog if there have been changes 
 		return new OO.ui.Process().next(
-			OO.ui.confirm("Changes made will be discarded.", {title:"Close Rater?"})
+			OO.ui.confirm("تغییرات ذخیره نخواهند شد.", {title:"می‌خواهید درجه‌بند را ببندید؟"})
 				.then(confirmed => confirmed ? this.close() : null)
 		);
 	}
@@ -575,16 +579,16 @@ MainWindow.prototype.onSearchSelect = function(data) {
 	// Abort and show alert if banner already exists
 	if (existingBanner) {
 		this.topBar.searchBox.popPending();
-		return OO.ui.alert("There is already a {{" + name + "}} banner").then(this.searchBox.focus());
+		return OO.ui.alert("در حال حاضر الگویی با عنوان {{" + name + "}} وجود دارد.").then(this.searchBox.focus());
 	}
 
 	// Confirmation required for banners missing WikiProject from name, and for uncreated disambiguation talk pages
 	var confirmText;
-	if (!/^[Ww](?:P|iki[Pp]roject)/.test(name)) {
+	if (!/(ویکی‌پروژه)/.test(name)) {
 		confirmText = new OO.ui.HtmlSnippet(
-			"{{" + mw.html.escape(name) + "}} is not a recognised WikiProject banner.<br/>Do you want to continue?"
+			"{{" + mw.html.escape(name) + "}} با عبارت «ویکی‌پروژه» آغاز نمی‌شود. آیا می‌خواهید ادامه دهید؟"
 		);
-	} else if (name === "WikiProject Disambiguation" && $("#ca-talk.new").length !== 0 && this.bannerList.items.length === 0) {
+	} else if (name === "ویکی‌پروژه ابهام‌زدایی" && $("#ca-talk.new").length !== 0 && this.bannerList.items.length === 0) {
 		// eslint-disable-next-line no-useless-escape
 		confirmText = "New talk pages shouldn't be created if they will only contain the \{\{WikiProject Disambiguation\}\} banner. Continue?";
 	}
@@ -661,7 +665,7 @@ MainWindow.prototype.transformTalkWikitext = function(talkWikitext) {
 	talkTemplates.forEach(template => {
 		tempStr = tempStr.replace(template.wikitext, "");
 	});
-	if (/^#REDIRECT/i.test(talkWikitext) || !tempStr.trim()) {
+	if (/^#تغییر_مسیر/i.test(talkWikitext) || !tempStr.trim()) {
 		// Is a redirect, or everything is a template: insert at the end
 		return talkWikitext.trim() + "\n" + bannersWikitext.trim();
 	} else {
@@ -674,7 +678,7 @@ MainWindow.prototype.isRatedAndNotStub = function() {
 	const nonStubRatinggs = this.bannerList.items.filter(banner =>
 		banner.hasClassRatings &&
 		banner.classDropdown.getValue() &&
-		banner.classDropdown.getValue() !== "Stub"
+		banner.classDropdown.getValue() !== "خرد"
 	);
 	return nonStubRatinggs.length > 0;
 };
@@ -683,7 +687,7 @@ MainWindow.prototype.makeEditSummary = function() {
 	const removedBanners = [];
 	const editedBanners = [];
 	const newBanners = [];
-	const shortName = name => name.replace("WikiProject ","").replace("Subst:","");
+	const shortName = name => name.replace("ویکی‌پروژه ","").replace("Subst:","");
 
 	// Overall class/importance, if all the same
 	const allClasses = uniqueArray(
@@ -743,7 +747,7 @@ MainWindow.prototype.makeEditSummary = function() {
 		: (someClassesChanged && overallClass) || (someImportancesChanged && overallImportance) || "";
 	if (overallRating) { overallRating = " (" + overallRating + ")"; }
 
-	return `Assessment${overallRating}: ${[...editedBanners, ...newBanners, ...removedBanners].join(", ")}${appConfig.script.advert}`;
+	return `ارزیابی${overallRating}: ${[...editedBanners, ...newBanners, ...removedBanners].join(", ")}${appConfig.script.advert}`;
 };
 
 export default MainWindow;

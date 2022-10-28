@@ -19,40 +19,41 @@ function TopBarWidget( config ) {
     
 	// Search box
 	this.searchBox = new SuggestionLookupTextInputWidget( {
-		placeholder: "Add a WikiProject...",
+		placeholder: "عنوان ویکی‌پروژه را وارد کنید",
 		$element: $("<div style='display:inline-block; margin:0 -1px; width:calc(100% - 55px);'>"),
 		$overlay: this.$overlay,
 	} );
+
 	getBannerNames()
 		.then(banners => [
 			...banners.withRatings.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("ویکی‌پروژه ", ""),
 				data: {
 					name: bannerName
 				}
 			})),
 			...banners.withoutRatings.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("ویکی‌پروژه ", ""),
 				data: {
 					name: bannerName,
 					withoutRatings: true
 				}
 			})),
 			...banners.wrappers.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", "") + " [template wrapper]",
+				label: bannerName.replace("ویکی‌پروژه ", "") + " [template wrapper]",
 				data: {
 					name: bannerName,
 					wrapper: true
 				}
 			})),
 			...banners.notWPBM.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", ""),
+				label: bannerName.replace("ویکی‌پروژه ", ""),
 				data: {
 					name: bannerName
 				}
 			})),
 			...banners.inactive.map(bannerName => ({
-				label: bannerName.replace("WikiProject ", "") + " [inactive]",
+				label: bannerName.replace("ویکی‌پروژه ", "") + " [inactive]",
 				data: {
 					name: bannerName,
 					withoutRatings: true
@@ -67,31 +68,30 @@ function TopBarWidget( config ) {
 			}))
 		])
 		.then(bannerOptions => this.searchBox.setSuggestions(bannerOptions));
-    
 	// Add button
 	this.addBannerButton = new OO.ui.ButtonWidget( {
 		icon: "add",
-		title: "Add",
+		title: "افزودن",
 		flags: "progressive",
 		$element: $("<span style='float:right;margin: 0;transform: translateX(-12px);'>"),
 	} );
 	var $searchContainer = $("<div style='display:inline-block; flex-shrink:1; flex-grow:100; min-width:250px; width:50%;'>")
-		.append(this.searchBox.$element, this.addBannerButton.$element);
+		.append(this.addBannerButton.$element, this.searchBox.$element);
 
 	// Set all classes/importances
 	// in the style of a popup button with a menu (is actually a dropdown with a hidden label, because that makes the coding easier.)
 	this.setAllDropDown = new OO.ui.DropdownWidget( {
 		icon: "tag",
-		label: "Set all...",
+		label: "تنظیم یکدست...",
 		invisibleLabel: true,
 		menu: {
 			items: [
 				new OO.ui.MenuSectionOptionWidget( {
-					label: "Classes"
+					label: "درجه"
 				} ),
 				new OO.ui.MenuOptionWidget( {
 					data: {class: null},
-					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(no class)</span>")
+					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(درجه‌بندی‌نشده)</span>")
 				} ),
 				...appConfig.bannerDefaults.classes.map(classname => new OO.ui.MenuOptionWidget( {
 					data: {class: classname},
@@ -99,11 +99,11 @@ function TopBarWidget( config ) {
 				} )
 				),
 				new OO.ui.MenuSectionOptionWidget( {
-					label: "Importances"
+					label: "اهمیت"
 				} ),
 				new OO.ui.MenuOptionWidget( {
 					data: {importance: null},
-					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(no importance)</span>")
+					label: new OO.ui.HtmlSnippet("<span style=\"color:#777\">(اهمیت‌بندی‌نشده)</span>")
 				} ),
 				...appConfig.bannerDefaults.importances.map(importance => new OO.ui.MenuOptionWidget( {
 					data: {importance: importance},
@@ -119,14 +119,14 @@ function TopBarWidget( config ) {
 	// Remove all banners button
 	this.removeAllButton = new OO.ui.ButtonWidget( {
 		icon: "trash",
-		title: "Remove all",
+		title: "حذف همه الگوها",
 		flags: "destructive"
 	} );
 
 	// Clear all parameters button
 	this.clearAllButton = new OO.ui.ButtonWidget( {
 		icon: "cancel",
-		title: "Clear all",
+		title: "پاک کردن همهٔ پارامترها",
 		flags: "destructive"
 	} );
 

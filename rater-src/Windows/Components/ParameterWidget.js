@@ -119,7 +119,7 @@ function ParameterWidget( parameter, paramData, config ) {
 	this.editLayout = new OO.ui.FieldLayout( this.editLayoutControls, {
 		label: this.name + " =",
 		align: "top",
-		help: this.paramData.description && this.paramData.description.en || false,
+		help: this.paramData.description && this.paramData.description.fa || false,
 		helpInline: true
 	}).toggle();
 	this.editLayout.$element.find("label.oo-ui-inline-help").css({"margin": "-10px 0 5px 10px"});

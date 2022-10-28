@@ -9,10 +9,10 @@ var isAfterDate = function(dateString) {
 var yesWords = [
 	"add",
 	"added",
-	"affirm",
-	"affirmed",
-	"include",
-	"included",
+	"شد",
+	"آری",
+	"بله",
+	"اضافه",
 	"on",
 	"true",
 	"yes",
@@ -21,17 +21,17 @@ var yesWords = [
 ];
 var noWords = [
 	"decline",
-	"declined",
+	"خیر",
 	"exclude",
-	"excluded",
+	"نه",
 	"false",
 	"none",
 	"not",
 	"no",
 	"n",
 	"off",
-	"omit",
-	"omitted",
+	"حذف",
+	"نشد",
 	"remove",
 	"removed",
 	"0"
@@ -114,21 +114,13 @@ function classMask(classVal) {
 		return classVal;
 	}
 	switch (classVal.toLowerCase()) {
-	case "fa":
-	case "fl":
-	case "a":
-	case "ga":
-	case "b":
-	case "c":
+
 	case "na":
 	case "fm":
 	case "al":
 	case "bl":
 	case "cl":
 		return classVal.toUpperCase();
-	case "start":
-	case "stub":
-	case "list":
 	case "portal":
 	case "project":
 	case "draft":

@@ -19,7 +19,7 @@ var LoadDialog = function LoadDialog( config ) {
 OO.inheritClass( LoadDialog, OO.ui.Dialog ); 
 
 LoadDialog.static.name = "loadDialog";
-LoadDialog.static.title = "Loading Rater...";
+LoadDialog.static.title = "در حال بارگذاری درجه‌بند...";
 
 // Customize the initialize() function: This is where to add content to the dialog body and set up event handlers.
 LoadDialog.prototype.initialize = function () {
@@ -36,36 +36,36 @@ LoadDialog.prototype.initialize = function () {
 	} );
 	this.setuptasks = [
 		new OO.ui.LabelWidget( {
-			label: "Loading your Rater preferences...",
+			label: "بارگذاری ترجیحات شما...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Loading list of project banners...",
+			label: "بارگذاری فهرستی از الگوهای ویکی‌پروژه‌ها...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Loading talkpage wikitext...",
+			label: "بارگذاری متن صفحهٔ بحث...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Parsing talkpage templates...",
+			label: "استخراج الگوهای صفحهٔ بحث...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Getting templates' parameter data...",
+			label: "دریافت پارامترهای الگوها...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Checking subject page...",
+			label: "بررسی موضوع صفحه...",
 			$element: $("<p style=\"display:block\">")
 		}),
 		new OO.ui.LabelWidget( {
-			label: "Retrieving quality prediction...",
+			label: "دریافت پیش‌بینی کیفیت...",
 			$element: $("<p style=\"display:block\">")
 		}).toggle(),
 	];
 	this.closeButton = new OO.ui.ButtonWidget( {
-		label: "Close"
+		label: "بستن"
 	}).toggle();
 	this.setupPromises = [];
 
@@ -107,7 +107,7 @@ LoadDialog.prototype.addTaskPromiseHandlers = function(taskPromises) {
 	var onTaskDone = index => {
 		// Add "Done!" to label
 		var widget = this.setuptasks[index];
-		widget.setLabel(widget.getLabel() + " Done!");
+		widget.setLabel(widget.getLabel() + " شد!");
 		// Increment status bar. Show a smooth transition by
 		// using small steps over a short duration.
 		var totalIncrement = 100 / this.setuptasks.length; // percent
@@ -126,7 +126,7 @@ LoadDialog.prototype.addTaskPromiseHandlers = function(taskPromises) {
 	var onTaskError = (index, code, info) => {
 		var widget = this.setuptasks[index];
 		widget.setLabel(
-			widget.getLabel() + " Failed. " + makeErrorMsg(code, info)
+			widget.getLabel() + " شکست خورد. " + makeErrorMsg(code, info)
 		);
 		this.closeButton.toggle(true);
 		this.updateSize();
