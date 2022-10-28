@@ -401,8 +401,8 @@ BannerWidget.prototype.onParameterAdd = function() {
 	}
 	var newParameter = new ParameterWidget(
 		{
-			"نام": name,
-			"ارزش": value || autovalue
+			"name": name,
+			"value": value || autovalue
 		},
 		this.paramData[name],
 		{$overlay: this.$overlay}

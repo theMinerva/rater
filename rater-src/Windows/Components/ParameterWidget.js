@@ -74,7 +74,7 @@ function ParameterWidget( parameter, paramData, config ) {
 
 	this.confirmButton = new OO.ui.ButtonWidget({
 		icon: "check",
-		label: "Done",
+		label: "اعمال",
 		framed: false,
 		flags: "progressive",
 		$element: $("<span style='margin-right:0'>")
@@ -82,13 +82,13 @@ function ParameterWidget( parameter, paramData, config ) {
 
 	this.cancelButton = new OO.ui.ButtonWidget({
 		icon: "undo",
-		label: "Cancel",
+		label: "بازگشت",
 		framed: false,
 	});
 
 	this.deleteButton = new OO.ui.ButtonWidget({
 		icon: this.isRequired ? "restore" : "trash",
-		label: this.isRequired ? "Required parameter" : "Delete",
+		label: this.isRequired ? "Required parameter" : "حذف",
 		framed: false,
 		flags: "destructive",
 		disabled: this.isRequired

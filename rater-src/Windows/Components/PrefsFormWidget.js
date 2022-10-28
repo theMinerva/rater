@@ -147,7 +147,7 @@ PrefsFormWidget.prototype.getPrefs = function() {
 };
 
 PrefsFormWidget.prototype.onResetCacheClick = function() {
-	OO.ui.confirm("After reseting cache, Rater will close and restart. Any changes made will be discarded.")
+	OO.ui.confirm("آیا مطمئنید؟ با اینکار ابزار یک بار باز و بسته می‌شود و تغییرات از دست می‌روند.")
 		.then(confirmed => {
 			if (confirmed) { 
 				this.emit("resetCache");

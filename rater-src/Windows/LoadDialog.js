@@ -73,7 +73,7 @@ LoadDialog.prototype.initialize = function () {
 	this.content.$element.append(
 		this.progressBar.$element,
 		(new OO.ui.LabelWidget( {
-			label: "Initialising:",
+			label: "بارگذاری:",
 			$element: $("<strong style=\"display:block\">")
 		})).$element,
 		...this.setuptasks.map(widget => widget.$element),
